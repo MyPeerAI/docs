@@ -21,27 +21,32 @@
   "paths": {
     "/v1/products/getOne": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
+        "description": "Returns a single product by productID",
         "parameters": [
           {
-            "name": "limit",
+            "name": "productID",
             "in": "query",
             "description": "The maximum number of results to return",
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "object",
+              "properties": {
+                "productID": {
+                  "description": "A valid productID",
+                  "type": "string"
+                }
+              }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "API Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
+                  "type": "object",
                   "items": {
-                    "$ref": "#/components/schemas/Plant"
+                    "$ref": "#/components/schemas/Product"
                   }
                 }
               }
