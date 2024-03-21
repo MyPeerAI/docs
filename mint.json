@@ -49,9 +49,9 @@
     {
       "group": "Products",
       "pages": [
-        "api-reference/products/create",
         "api-reference/products/get",
         "api-reference/products/getList",
+        "api-reference/products/create",
         "api-reference/products/update"
       ]
     },

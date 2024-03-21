@@ -95,27 +95,29 @@
     },
     "/v1/products/addOne": {
       "post": {
-        "description": "Returns all plants from the system that the user has access to",
+        "description": "Creates a new product under a given user and/or organization",
         "parameters": [
           {
             "name": "limit",
             "in": "query",
-            "description": "The maximum number of results to return",
+            "description": "JSON representation of your product",
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "$ref": "#/components/schemas/Product"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "API Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
+                  "type": "object",
+                  "properties": {
+                    "productID": {
+                      "description": "URL to product page, if applicable",
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -178,18 +180,37 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
+      "Product": {
         "required": [
-          "name"
+          "name",
+          "desc",
+          "orgID",
+          "userID"
         ],
         "type": "object",
         "properties": {
           "name": {
-            "description": "The name of the plant",
+            "description": "Name of the product",
             "type": "string"
           },
-          "tag": {
-            "description": "Tag to specify the type",
+          "desc": {
+            "description": "A detailed description of the product",
+            "type": "string"
+          },
+          "url": {
+            "description": "URL to product page, if applicable",
+            "type": "string"
+          },
+          "orgID": {
+            "description": "Organization ID. See Organizations endpoint for details",
+            "type": "string"
+          },
+          "userID": {
+            "description": "User ID. See Users endpoint for details",
+            "type": "string"
+          },
+          "imageLink": {
+            "description": "URL to an image of the product",
             "type": "string"
           }
         }
