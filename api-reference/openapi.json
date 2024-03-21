@@ -22,18 +22,20 @@
     "/v1/products/getOne": {
       "get": {
         "description": "Returns a single product by productID",
-        "parameters": [
+        "requestBody": [
           {
-            "name": "productID",
-            "in": "query",
             "required": true,
             "description": "The maximum number of results to return",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "productID": {
-                  "description": "A valid productID",
-                  "type": "string"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "productID": {
+                      "description": "A valid productID",
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -102,14 +104,16 @@
     "/v1/products/addOne": {
       "post": {
         "description": "Creates a new product under a given user and/or organization",
-        "parameters": [
+        "requestBody": [
           {
-            "name": "product",
             "required": true,
-            "in": "query",
             "description": "JSON representation of your product",
-            "schema": {
-              "$ref": "#/components/schemas/Product"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
             }
           }
         ],
@@ -122,7 +126,7 @@
                   "type": "object",
                   "properties": {
                     "productID": {
-                      "description": "URL to product page, if applicable",
+                      "description": "Created product's productID",
                       "type": "string"
                     }
                   }
