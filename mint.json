@@ -49,17 +49,19 @@
     {
       "group": "Products",
       "pages": [
-        "api-reference/products/get",
         "api-reference/products/create",
-        "api-reference/products/delete"
+        "api-reference/products/get",
+        "api-reference/products/getList",
+        "api-reference/products/update"
       ]
     },
     {
       "group": "Interviews",
       "pages": [
-        "api-reference/interviews/get",
         "api-reference/interviews/create",
-        "api-reference/interviews/delete"
+        "api-reference/interviews/get",
+        "api-reference/interviews/getList",
+        "api-reference/interviews/update"
       ]
     },
     {
