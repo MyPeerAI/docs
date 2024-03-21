@@ -46,11 +46,35 @@
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Products",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/products/get",
+        "api-reference/products/create",
+        "api-reference/products/delete"
+      ]
+    },
+    {
+      "group": "Interviews",
+      "pages": [
+        "api-reference/interviews/get",
+        "api-reference/interviews/create",
+        "api-reference/interviews/delete"
+      ]
+    },
+    {
+      "group": "Invites",
+      "pages": [
+        "api-reference/invites/get",
+        "api-reference/invites/create",
+        "api-reference/invites/delete"
+      ]
+    },
+    {
+      "group": "Profiles",
+      "pages": [
+        "api-reference/profiles/get",
+        "api-reference/profiles/create",
+        "api-reference/profiles/delete"
       ]
     }
   ],
