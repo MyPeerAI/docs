@@ -26,6 +26,7 @@
           {
             "name": "productID",
             "in": "query",
+            "required": true,
             "description": "The maximum number of results to return",
             "schema": {
               "type": "object",
@@ -67,11 +68,11 @@
     },
     "/v1/products/getAll": {
       "get": {
-        "description": "Deletes a single plant based on the ID supplied",
+        "description": "Returns a list of all products under a given user and/or organization",
         "parameters": [
           {
             "name": "id",
-            "in": "path",
+            "in": "query",
             "description": "ID of plant to delete",
             "required": true,
             "schema": {
@@ -103,7 +104,8 @@
         "description": "Creates a new product under a given user and/or organization",
         "parameters": [
           {
-            "name": "limit",
+            "name": "product",
+            "required": true,
             "in": "query",
             "description": "JSON representation of your product",
             "schema": {
@@ -143,11 +145,12 @@
     },
     "/v1/products/updateOne": {
       "post": {
-        "description": "Returns all plants from the system that the user has access to",
+        "description": "Updates a product by productID",
         "parameters": [
           {
-            "name": "limit",
+            "name": "update",
             "in": "query",
+            "required": true,
             "description": "The maximum number of results to return",
             "schema": {
               "type": "integer",
@@ -163,7 +166,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Plant"
+                    "$ref": "#/components/schemas/Error"
                   }
                 }
               }
@@ -223,7 +226,7 @@
       "NewPlant": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/Plant"
+            "$ref": "#/components/schemas/Error"
           },
           {
             "required": [
