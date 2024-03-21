@@ -22,22 +22,15 @@
     "/v1/products/getOne": {
       "get": {
         "description": "Returns a single product by productID",
-        "requestBody": [
+        "parameters": [
           {
+            "name": "id",
+            "in": "query",
+            "description": "ID of plant to delete",
             "required": true,
-            "description": "The maximum number of results to return",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "productID": {
-                      "description": "A valid productID",
-                      "type": "string"
-                    }
-                  }
-                }
-              }
+            "schema": {
+              "type": "integer",
+              "format": "int64"
             }
           }
         ],
@@ -73,13 +66,19 @@
         "description": "Returns a list of all products under a given user and/or organization",
         "parameters": [
           {
-            "name": "id",
+            "name": "userID",
             "in": "query",
-            "description": "ID of plant to delete",
-            "required": true,
+            "description": "Retreive products associated with this userID ",
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
+            }
+          },
+          {
+            "name": "orgID",
+            "in": "query",
+            "description": "Retreive products associated with this orgID",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -104,7 +103,7 @@
     "/v1/products/addOne": {
       "post": {
         "description": "Creates a new product under a given user and/or organization",
-        "requestBody": [
+        "requestBody": 
           {
             "required": true,
             "description": "JSON representation of your product",
@@ -115,8 +114,7 @@
                 }
               }
             }
-          }
-        ],
+          },
         "responses": {
           "200": {
             "description": "API Response",
