@@ -24,13 +24,12 @@
         "description": "Returns a single product by productID",
         "parameters": [
           {
-            "name": "id",
+            "name": "productID",
             "in": "query",
-            "description": "ID of plant to delete",
+            "description": "The productID to retrieve",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
             }
           }
         ],
@@ -68,7 +67,7 @@
           {
             "name": "userID",
             "in": "query",
-            "description": "Retreive products associated with this userID ",
+            "description": "Retrieve products associated with this userID ",
             "schema": {
               "type": "string"
             }
@@ -76,16 +75,28 @@
           {
             "name": "orgID",
             "in": "query",
-            "description": "Retreive products associated with this orgID",
+            "description": "Retrieve products associated with this orgID",
             "schema": {
               "type": "string"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
+          "200": {
+            "description": "Product List",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "products" : {
+                      "description": "Array of JSON objects with product details matching query",
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "unexpected error",
@@ -148,27 +159,30 @@
     "/v1/products/updateOne": {
       "post": {
         "description": "Updates a product by productID",
-        "parameters": [
+        "requestBody": 
           {
-            "name": "update",
-            "in": "query",
             "required": true,
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
+            "description": "JSON representation of your product with updated fields",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+        "responses": {
+          "200": {
+            "description": "API Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "description": "Outcome of the operation",
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -224,26 +238,6 @@
             "type": "string"
           }
         }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Error"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          }
-        ]
       },
       "Error": {
         "required": [
