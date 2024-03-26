@@ -62,6 +62,7 @@
         "description": "Returns a list of all products under a given user and/or organization",
         "parameters": [
           {
+            "required": true,
             "name": "userID",
             "in": "query",
             "description": "Retrieve products associated with this userID ",
@@ -70,6 +71,7 @@
             }
           },
           {
+            "required": true,
             "name": "orgID",
             "in": "query",
             "description": "Retrieve products associated with this orgID",
