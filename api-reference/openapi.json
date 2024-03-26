@@ -39,10 +39,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "items": {
                     "$ref": "#/components/schemas/Product"
-                  }
                 }
               }
             }
@@ -60,7 +57,7 @@
         }
       }
     },
-    "/v1/products/getAll": {
+    "/v1/products/getList": {
       "get": {
         "description": "Returns a list of all products under a given user and/or organization",
         "parameters": [
@@ -87,13 +84,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "products" : {
-                      "description": "Array of JSON objects with product details matching query",
-                      "type": "array"
+                    "description": "Array of JSON objects with product details matching query",
+                    "type": "array",
+                    "items":{
+                      "$ref": "#/components/schemas/Product"
                     }
-                  }
                 }
               }
             }
@@ -181,7 +176,17 @@
                   "properties": {
                     "result": {
                       "description": "Outcome of the operation",
-                      "type": "string"
+                      "type": "object",
+                      "properties": {
+                        "productID": {
+                          "type": "string",
+                          "description": "productID of item that was updated"
+                        },
+                        "status": {
+                          "type":"string",
+                          "description": "Outcome of the operation"
+                        }
+                      }
                     }
                   }
                 }
