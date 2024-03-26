@@ -39,7 +39,12 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "type":"object",
+                  "properties": {
+                    "result": {
                     "$ref": "#/components/schemas/Product"
+                    }
+                  }
                 }
               }
             }
@@ -86,11 +91,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                    "description": "Array of JSON objects with product details matching query",
-                    "type": "array",
-                    "items":{
-                      "$ref": "#/components/schemas/Product"
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Array of JSON objects with product details matching query",
+                      "items": {
+                        "$ref": "#/components/schemas/Product"
+                      }
                     }
+                  }
+                  
                 }
               }
             }
@@ -111,18 +122,17 @@
     "/v1/products/addOne": {
       "post": {
         "description": "Creates a new product under a given user and/or organization",
-        "requestBody": 
-          {
-            "required": true,
-            "description": "JSON representation of your product",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Product"
-                }
+        "requestBody": {
+          "required": true,
+          "description": "JSON representation of your product",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
               }
             }
-          },
+          }
+        },
         "responses": {
           "200": {
             "description": "API Response",
@@ -131,9 +141,14 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "productID": {
-                      "description": "Created product's productID",
-                      "type": "string"
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "productID": {
+                          "description": "Created product's productID",
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -156,18 +171,17 @@
     "/v1/products/updateOne": {
       "post": {
         "description": "Updates a product by productID",
-        "requestBody": 
-          {
-            "required": true,
-            "description": "JSON representation of your product with updated fields",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Product"
-                }
+        "requestBody": {
+          "required": true,
+          "description": "JSON representation of your product with updated fields",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
               }
             }
-          },
+          }
+        },
         "responses": {
           "200": {
             "description": "API Response",
@@ -184,7 +198,7 @@
                           "description": "productID of item that was updated"
                         },
                         "status": {
-                          "type":"string",
+                          "type": "string",
                           "description": "Outcome of the operation"
                         }
                       }
