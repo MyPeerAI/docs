@@ -29,7 +29,7 @@
             "description": "The productID to retrieve",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "string"
             }
           }
         ],
