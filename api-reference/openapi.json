@@ -515,7 +515,7 @@
         "parameters": [
           {
             "required": true,
-            "name": "n",
+            "name": "N",
             "in": "query",
             "description": "Number of invites to generate",
             "schema": {
