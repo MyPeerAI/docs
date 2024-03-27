@@ -456,7 +456,11 @@
       },
       "Interview": {
         "type": "object",
-        "required": ["productID", "interviewName", "guidelines"],
+        "required": [
+          "productID",
+          "interviewName",
+          "guidelines"
+        ],
         "properties": {
           "interviewID": {
             "type": "string",
@@ -495,10 +499,7 @@
             "type": "array",
             "description": "List of productIDs for which this Customer has participate in interviews",
             "items": {
-              "schema": {
-                "type": "string",
-                "description": "productID"
-              }
+              "type": "string"
             }
           },
           "firstName": {
@@ -537,61 +538,53 @@
           },
           "details": {
             "type": "object",
-            "description" : "Customer details including demographics, key values, etc.",
-            "properties" : {
-                "occupation": {
-                  "type": "string",
-                  "description": "Customer's occupation, sourced from interview onboarding steps"
-                },
-                "location": {
-                  "type": "string",
-                  "description": "Customer's location - Ex: Los Angeles, CA, USA"
-                },
-                "background": {
-                  "type": "string",
-                  "description": "Background information about the customer"
-                },
-                "productAlignment": {
-                  "type": "string",
-                  "description": "The customer's alignment and core feedback on the product"
-                },
-                "key_values": {
-                  "type": "array",
-                  "description": "List of key values the customer looks for in similar products",
-                  "items": {
-                    "schema": {
-                      "type": "string",
-                      "description": "Value"
-                    }
-                  }
-                },
-                "interests": {
-                  "type": "array",
-                  "description": "List of customer's interests, revealed by their responses",
-                  "items": {
-                    "schema": {
-                      "type": "string",
-                      "description": "Interest"
-                    }
-                  }
+            "description": "Customer details including demographics, key values, etc.",
+            "properties": {
+              "occupation": {
+                "type": "string",
+                "description": "Customer's occupation, sourced from interview onboarding steps"
+              },
+              "location": {
+                "type": "string",
+                "description": "Customer's location - Ex: Los Angeles, CA, USA"
+              },
+              "background": {
+                "type": "string",
+                "description": "Background information about the customer"
+              },
+              "productAlignment": {
+                "type": "string",
+                "description": "The customer's alignment and core feedback on the product"
+              },
+              "key_values": {
+                "type": "array",
+                "description": "List of key values the customer looks for in similar products",
+                "items": {
+                  "type": "string"
                 }
+              },
+              "interests": {
+                "type": "array",
+                "description": "List of customer's interests, revealed by their responses",
+                "items": {
+                  "type": "string"
+                }
+              }
             }
           },
           "history": {
             "type": "array",
             "description": "List of past interviews/simulations this customer profile has participated in",
             "items": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "description": "Participation method - link or simulation (coming soon)"
-                  },
-                  "id": {
-                    "type": "string",
-                    "description": "ID of Invite or simulation"
-                  }
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Participation method - link or simulation (coming soon)"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "ID of Invite or simulation"
                 }
               }
             }
@@ -600,7 +593,10 @@
       },
       "Invite": {
         "type": "object",
-        "required": ["interviewID", "orgID"],
+        "required": [
+          "interviewID",
+          "orgID"
+        ],
         "properties": {
           "linkID": {
             "type": "string",
