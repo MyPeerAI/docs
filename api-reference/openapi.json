@@ -420,7 +420,8 @@
           "name",
           "desc",
           "orgID",
-          "userID"
+          "userID",
+          "productID"
         ],
         "type": "object",
         "properties": {
@@ -494,7 +495,8 @@
         "required": [
           "productID",
           "interviewName",
-          "guidelines"
+          "guidelines",
+          "interviewID"
         ],
         "properties": {
           "interviewID": {
