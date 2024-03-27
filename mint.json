@@ -58,24 +58,24 @@
     {
       "group": "Interviews",
       "pages": [
-        "api-reference/interviews/create",
         "api-reference/interviews/get",
         "api-reference/interviews/getList",
+        "api-reference/interviews/create",
         "api-reference/interviews/update"
       ]
     },
     {
       "group": "Invites",
       "pages": [
-        "api-reference/invites/get",
-        "api-reference/invites/create",
-        "api-reference/invites/delete"
+        "api-reference/invites/getList",
+        "api-reference/invites/create"
       ]
     },
     {
       "group": "Profiles",
       "pages": [
         "api-reference/profiles/get",
+        "api-reference/profiles/getList",
         "api-reference/profiles/create",
         "api-reference/profiles/delete"
       ]

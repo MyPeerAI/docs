@@ -39,10 +39,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type":"object",
+                  "type": "object",
                   "properties": {
                     "result": {
-                    "$ref": "#/components/schemas/Product"
+                      "$ref": "#/components/schemas/Product"
                     }
                   }
                 }
@@ -101,7 +101,6 @@
                       }
                     }
                   }
-                  
                 }
               }
             }
@@ -220,6 +219,198 @@
           }
         }
       }
+    },
+    "/v1/interviews/getOne": {
+      "get": {
+        "description": "Returns a single interview by interviewID",
+        "parameters": [
+          {
+            "name": "interviewID",
+            "in": "query",
+            "description": "The interviewID to retrieve",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "API Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Interview"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/interviews/getList": {
+      "get": {
+        "description": "Returns a list of all interviews under a given product",
+        "parameters": [
+          {
+            "required": true,
+            "name": "productID",
+            "in": "query",
+            "description": "Retrieve interviews associated with this productID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Interview List",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Array of JSON objects with interview details matching query",
+                      "items": {
+                        "$ref": "#/components/schemas/Interview"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/interviews/addOne": {
+      "post": {
+        "description": "Creates a new product under a given user and/or organization",
+        "requestBody": {
+          "required": true,
+          "description": "JSON representation of your product",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Interview"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "API Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "interviewID": {
+                          "description": "Created interview's productID",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/interviews/updateOne": {
+      "post": {
+        "description": "Updates an Interview by interviewID",
+        "requestBody": {
+          "required": true,
+          "description": "JSON representation of the Interview with updated fields",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Interview"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "API Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "interviewID": {
+                          "type": "string",
+                          "description": "interviewID of item that was updated"
+                        },
+                        "status": {
+                          "type": "string",
+                          "description": "Outcome of the operation"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -233,6 +424,10 @@
         ],
         "type": "object",
         "properties": {
+          "productID": {
+            "description": "Product ID",
+            "type": "string"
+          },
           "name": {
             "description": "Name of the product",
             "type": "string"
@@ -256,6 +451,194 @@
           "imageLink": {
             "description": "URL to an image of the product",
             "type": "string"
+          }
+        }
+      },
+      "Interview": {
+        "type": "object",
+        "required": ["productID", "interviewName", "guidelines"],
+        "properties": {
+          "interviewID": {
+            "type": "string",
+            "description": "Interview ID"
+          },
+          "productID": {
+            "type": "string",
+            "description": "ID of the Product the interview is about"
+          },
+          "userID": {
+            "type": "string",
+            "description": "userID associated with this interview"
+          },
+          "interviewName": {
+            "type": "string",
+            "description": "A name for the interview"
+          },
+          "guidelines": {
+            "type": "string",
+            "description": "Interview guidelines, including any insights you hope to extract, specific questiosn you'd like to ask, etc."
+          },
+          "interviewer": {
+            "type": "string",
+            "description": "ID associated with the Interviewer Agent assigned to this interview. Defaults to Eve from Entropi"
+          }
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "profileID": {
+            "type": "string",
+            "description": ""
+          },
+          "productIDs": {
+            "type": "array",
+            "description": "List of productIDs for which this Customer has participate in interviews",
+            "items": {
+              "schema": {
+                "type": "string",
+                "description": "productID"
+              }
+            }
+          },
+          "firstName": {
+            "type": "string",
+            "description": "Customer's first name"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Customer's last name"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Metadata associated with this customer profile",
+            "properties": {
+              "source": {
+                "type": "string",
+                "description": "Source of the profile. Can be Human derived, or AI generated (Coming soon)"
+              },
+              "acquired_date": {
+                "type": "string",
+                "description": "Date customer profile was acquired"
+              },
+              "last_interviewed": {
+                "type": "string",
+                "description": "Date customer profile was last interviewed"
+              },
+              "interview_count": {
+                "type": "integer",
+                "description": "Number of interviews this customer has completed"
+              },
+              "sentiment": {
+                "type": "integer",
+                "description": "Numerical grade of the customer's sentiment towards the product on a scale from 1 - 5, with 5 representing utmost satisfaction"
+              }
+            }
+          },
+          "details": {
+            "type": "object",
+            "description" : "Customer details including demographics, key values, etc.",
+            "properties" : {
+                "occupation": {
+                  "type": "string",
+                  "description": "Customer's occupation, sourced from interview onboarding steps"
+                },
+                "location": {
+                  "type": "string",
+                  "description": "Customer's location - Ex: Los Angeles, CA, USA"
+                },
+                "background": {
+                  "type": "string",
+                  "description": "Background information about the customer"
+                },
+                "productAlignment": {
+                  "type": "string",
+                  "description": "The customer's alignment and core feedback on the product"
+                },
+                "key_values": {
+                  "type": "array",
+                  "description": "List of key values the customer looks for in similar products",
+                  "items": {
+                    "schema": {
+                      "type": "string",
+                      "description": "Value"
+                    }
+                  }
+                },
+                "interests": {
+                  "type": "array",
+                  "description": "List of customer's interests, revealed by their responses",
+                  "items": {
+                    "schema": {
+                      "type": "string",
+                      "description": "Interest"
+                    }
+                  }
+                }
+            }
+          },
+          "history": {
+            "type": "array",
+            "description": "List of past interviews/simulations this customer profile has participated in",
+            "items": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Participation method - link or simulation (coming soon)"
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "ID of Invite or simulation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Invite": {
+        "type": "object",
+        "required": ["interviewID", "orgID"],
+        "properties": {
+          "linkID": {
+            "type": "string",
+            "description": "ID of the Invite"
+          },
+          "interviewID": {
+            "type": "string",
+            "description": "ID of the interview associated with the invite"
+          },
+          "orgID": {
+            "type": "string",
+            "description": "ID of the organization provisioning the invite"
+          },
+          "userInfo": {
+            "type": "object",
+            "description": "Respondent's details",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "Customer's email"
+              },
+              "name": {
+                "type": "string",
+                "description": "Customer's full name"
+              },
+              "occupation": {
+                "type": "string",
+                "description": "Customer's occupation"
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the invite. unopened/opened/started/complete"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "DateTime string representation of when the invite was provisioned"
           }
         }
       },
