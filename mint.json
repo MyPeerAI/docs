@@ -11,8 +11,8 @@
     "light": "#07C983",
     "dark": "#0D9373",
     "background": {
-      "light": "#d0efff",
-      "dark": "#000033"
+      "light": "#008080",
+      "dark": "#00001c"
     }
   },
   "topbarLinks": [
