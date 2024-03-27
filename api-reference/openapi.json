@@ -127,7 +127,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Product"
+                "$ref": "#/components/schemas/NewProduct"
               }
             }
           }
@@ -319,7 +319,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Interview"
+                "$ref": "#/components/schemas/NewInterview"
               }
             }
           }
@@ -336,7 +336,7 @@
                       "type": "object",
                       "properties": {
                         "interviewID": {
-                          "description": "Created interview's productID",
+                          "description": "Created interview's interviewID",
                           "type": "string"
                         }
                       }
@@ -454,6 +454,41 @@
           }
         }
       },
+      "NewProduct": {
+        "required": [
+          "name",
+          "desc",
+          "orgID",
+          "userID"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Name of the product",
+            "type": "string"
+          },
+          "desc": {
+            "description": "A detailed description of the product",
+            "type": "string"
+          },
+          "url": {
+            "description": "URL to product page, if applicable",
+            "type": "string"
+          },
+          "orgID": {
+            "description": "Organization ID. See Organizations endpoint for details",
+            "type": "string"
+          },
+          "userID": {
+            "description": "User ID. See Users endpoint for details",
+            "type": "string"
+          },
+          "imageLink": {
+            "description": "URL to an image of the product",
+            "type": "string"
+          }
+        }
+      },
       "Interview": {
         "type": "object",
         "required": [
@@ -485,6 +520,32 @@
           "interviewer": {
             "type": "string",
             "description": "ID associated with the Interviewer Agent assigned to this interview. Defaults to Eve from Entropi"
+          }
+        }
+      },
+      "NewInterview": {
+        "type": "object",
+        "required": [
+          "productID",
+          "interviewName",
+          "guidelines"
+        ],
+        "properties": {
+          "productID": {
+            "type": "string",
+            "description": "ID of the Product the interview is about"
+          },
+          "userID": {
+            "type": "string",
+            "description": "userID associated with this interview"
+          },
+          "interviewName": {
+            "type": "string",
+            "description": "A name for the interview"
+          },
+          "guidelines": {
+            "type": "string",
+            "description": "Interview guidelines, including any insights you hope to extract, specific questiosn you'd like to ask, etc."
           }
         }
       },
@@ -602,6 +663,49 @@
             "type": "string",
             "description": "ID of the Invite"
           },
+          "interviewID": {
+            "type": "string",
+            "description": "ID of the interview associated with the invite"
+          },
+          "orgID": {
+            "type": "string",
+            "description": "ID of the organization provisioning the invite"
+          },
+          "userInfo": {
+            "type": "object",
+            "description": "Respondent's details",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "Customer's email"
+              },
+              "name": {
+                "type": "string",
+                "description": "Customer's full name"
+              },
+              "occupation": {
+                "type": "string",
+                "description": "Customer's occupation"
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the invite. unopened/opened/started/complete"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "DateTime string representation of when the invite was provisioned"
+          }
+        }
+      },
+      "NewInvite": {
+        "type": "object",
+        "required": [
+          "interviewID",
+          "orgID"
+        ],
+        "properties": {
           "interviewID": {
             "type": "string",
             "description": "ID of the interview associated with the invite"
