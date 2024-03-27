@@ -411,6 +411,267 @@
           }
         }
       }
+    },
+    "/v1/invites/getList": {
+      "get": {
+        "description": "Returns a list of all Invites for a given Interview or Product. ",
+        "parameters": [
+          {
+            "name": "interviewID",
+            "in": "query",
+            "description": "Retrieve invites associated with this interviewID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productID",
+            "in": "query",
+            "description": "Retrieve invites associated with this productID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invite List",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Array of JSON objects with invite details matching query",
+                      "items": {
+                        "$ref": "#/components/schemas/Invite"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/invites/getOne": {
+      "get": {
+        "description": "Returns a single invite by linkID",
+        "parameters": [
+          {
+            "name": "linkID",
+            "in": "query",
+            "description": "The linkID to retrieve",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "API Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Invite"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/invites/createInvites": {
+      "get": {
+        "description": "Returns a list of N invite links to interviews",
+        "parameters": [
+          {
+            "required": true,
+            "name": "n",
+            "in": "query",
+            "description": "Number of invites to generate",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "required": true,
+            "name": "interviewID",
+            "in": "query",
+            "description": "ID of the interview associated with the invite",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": true,
+            "name": "productID",
+            "in": "query",
+            "description": "ID of the product associated with the invite",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "required": true,
+            "name": "orgID",
+            "in": "query",
+            "description": "ID of the Organization creating the invite",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invite List",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Array of N invite URLs",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/profiles/getList": {
+      "get": {
+        "description": "Returns a list of all profiles under a given product",
+        "parameters": [
+          {
+            "required": true,
+            "name": "productID",
+            "in": "query",
+            "description": "Retrieve profiles associated with this productID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile List",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "description": "Array of JSON objects with profile details matching query",
+                      "items": {
+                        "$ref": "#/components/schemas/Profile"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/profiles/getOne": {
+      "get": {
+        "description": "Returns a single profile by profileID",
+        "parameters": [
+          {
+            "name": "profileID",
+            "in": "query",
+            "description": "The profileID to retrieve",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "API Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Profile"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -656,10 +917,6 @@
       },
       "Invite": {
         "type": "object",
-        "required": [
-          "interviewID",
-          "orgID"
-        ],
         "properties": {
           "linkID": {
             "type": "string",
@@ -669,48 +926,9 @@
             "type": "string",
             "description": "ID of the interview associated with the invite"
           },
-          "orgID": {
+          "productID": {
             "type": "string",
-            "description": "ID of the organization provisioning the invite"
-          },
-          "userInfo": {
-            "type": "object",
-            "description": "Respondent's details",
-            "properties": {
-              "email": {
-                "type": "string",
-                "description": "Customer's email"
-              },
-              "name": {
-                "type": "string",
-                "description": "Customer's full name"
-              },
-              "occupation": {
-                "type": "string",
-                "description": "Customer's occupation"
-              }
-            }
-          },
-          "status": {
-            "type": "string",
-            "description": "Status of the invite. unopened/opened/started/complete"
-          },
-          "timestamp": {
-            "type": "string",
-            "description": "DateTime string representation of when the invite was provisioned"
-          }
-        }
-      },
-      "NewInvite": {
-        "type": "object",
-        "required": [
-          "interviewID",
-          "orgID"
-        ],
-        "properties": {
-          "interviewID": {
-            "type": "string",
-            "description": "ID of the interview associated with the invite"
+            "description": "ID of the product associated with the invite"
           },
           "orgID": {
             "type": "string",
@@ -741,6 +959,27 @@
           "timestamp": {
             "type": "string",
             "description": "DateTime string representation of when the invite was provisioned"
+          },
+          "completed_on": {
+            "type": "string",
+            "description": "Date string of when the interview was completed. Visible if status is completed"
+          },
+          "conversation": {
+            "type": "array",
+            "description": "Transcript of the entire interview",
+            "items":{
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string",
+                  "description": "Message sender - assistant denotes the Interviewer Agent, user denotes the customer's response"
+                },
+                "content": {
+                  "type": "string",
+                  "description": "Message content"
+                } 
+              }
+            }
           }
         }
       },
