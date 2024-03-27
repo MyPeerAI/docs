@@ -36,7 +36,8 @@
       "group": "Home",
       "pages": [
         "introduction",
-        "quickstart"
+        "quickstart",
+        "changelog"
       ]
     },
     {
